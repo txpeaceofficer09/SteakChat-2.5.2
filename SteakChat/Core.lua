@@ -207,6 +207,14 @@ local ChatEvents = {
 }
 ]]
 
+local OriginalDefaultChatFrameAddMessage = DEFAULT_CHAT_FRAME.AddMessage
+
+function DEFAULT_CHAT_FRAME:AddMessage(message, r, g, b, messageID, ...)
+	local currentTime = date("%H:%M:%S")
+	local modifiedMessage = string.format("[%s] %s", currentTime, message)
+	return OriginalDefaultChatFrameAddMessage(self, modifiedMessage, r, g, b, messageID, ...)
+end
+
 SteakChatPlayerData = {}
 
 --[[
